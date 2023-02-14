@@ -326,7 +326,9 @@ class PlainRegistry(metaclass=RegistryMeta):
 
     def __getattr__(self, item):
         getattr_maybe_raise(self, item)
-        return self.Unit(item)
+        u = self.Unit(item)
+        setattr(self, item, u)
+        return u
 
     def __getitem__(self, item):
         logger.warning(
